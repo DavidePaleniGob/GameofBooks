@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Game Of Books Online </title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="../dist/css/bootstrap-material-design.min.css">
+        <link rel="stylesheet" href="../dist/css/ripples.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="../dist/js/material.min.js"></script>
+        <script src="../dist/js/ripples.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <div class="navbar" style="background-color: #1565c0; ">
+                <div class="container-fluid" style="padding-right: 2%;">
+                    <div class="nav navbar-nav navbar-left">
+                        <img src="../LOGO_GOB.png" style="padding-top:4%;">
+                    </div>
+                    <div class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><h4> Username <b class="caret"></b></h4></a>
+                            <ul class="dropdown-menu" style="background-color: #1565c0;">
+                                <li><a href="javascript:void(0)" style="color: #FFFFFF;">Profilo</a></li>
+                                <li><a href="javascript:void(0)" style="color: #FFFFFF;">Opzioni</a></li>
+                                <li class="divider" style="background-color: #FFFFFF;"></li>
+                                <li><a href="javascript:void(0)" style="color: #FFFFFF;">Log out</a></li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid" id="body">
+                <script type="text/javascript">
+                    /*var carica = function (){
+                        $.post( "../controller.php", { 
+                            comando: "test", 
+                            parametri: { 
+                                titolo : $("#titolo").val(),
+                                visibile: $("#visibile").val(),
+                                img_copertina: $("#img_copertina").prop("files")[0],
+                                img_mappa: $("#img_mappa").prop("files")[0]
+                            }
+                        }).done(function( data ) {
+                            alert( "Data Loaded: " + data );
+                        });
+                    }*/
+                    var carica = function () {
+                        var data = new FormData();
+                        data.append("comando", "creare_lg");
+                        data.append("img_copertina", $("#img_copertina").prop("files")[0]);
+                        data.append("img_mappa", $("#img_mappa").prop("files")[0]);
+                        data.append("titolo", $("#titolo").val());
+                        data.append("visibile", $("#visibile").val());
+                        console.log(data);
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            url: "../controller.php",
+                            data: data,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+                                console.log("success");
+                                console.log(data);
+                            },
+                            error: function (data) {
+                                console.log("error");
+                                console.log(data);
+                            }
+                        });
+                    };
+                </script>
+                <div class="jumbotron">
+                    <form id="crea" name="crea" action="javascript: carica()" method="POST" enctype="multipart/form-data">
+                        <div class="container-fluid push-left">
+                            <div class="form-group">
+                                <label for="titolo" class="col-md-2 control-label">Titolo</label>
+                                <div class="col-md-10">
+                                    <input name="titolo" type="text" class="form-control" id="titolo">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="img_copertina" class="col-md-2 control-label">Immagine copertina</label>
+                                <div class="col-md-10">
+                                    <input type="text" readonly="" class="form-control" placeholder="Browse...">
+                                    <input type="file" name="img_copertina" id="img_copertina" multiple="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="img_mappa" class="col-md-2 control-label">Immagine mappa</label>
+                                <div class="col-md-10">
+                                    <input type="text" readonly="" class="form-control" placeholder="Browse...">
+                                    <input type="file" name="img_mappa" id="img_mappa" multiple="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="visibile" class="col-md-2 control-label">Pubblica</label>
+                                <div class="col-md-10">
+                                    <div class="togglebutton">
+                                        <label>
+                                            <input name="visibile" type="checkbox" id="visibile"><span class="toggle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            </br></br></br></br>
+                            <input type="submit" class="btn btn-raised btn-default" id="carica" value="Carica"><div class="ripple-container"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

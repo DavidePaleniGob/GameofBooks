@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<title> Game Of Books Online </title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="dist/css/bootstrap-material-design.min.css">
+	<link rel="stylesheet" href="dist/css/ripples.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="dist/js/material.min.js"></script>
+	<script src="dist/js/ripples.min.js"></script>
+
+
+</head>
+<body>
+	
+	<div>
+		<div class="navbar" style="background-color: #1565c0; ">
+			<div class="container-fluid" style="padding-right: 2%;">
+				<div class="nav navbar-nav navbar-left">
+					<img src="LOGO_GOB.png" style="width: 300px; ">
+				</div>
+				<div class="nav navbar-nav navbar-right">
+					<a href="javascript:void(0)" id ="nav_login" class="btn btn-raised btn-default right">Login<div class="ripple-container"></div></a>
+					<a href="javascript:void(0)" id ="nav_signin" class="btn btn-raised btn-default right">Sign in<div class="ripple-container"></div></a>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+        	<div class="col-md-6 col-md-offset-3">
+            	<div class="panel panel-default" id="body" style="padding: 3%">
+					<div class="panel-body">
+						<!-- Contenitore dei form -->
+					</div>
+				</div>
+            </div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+
+		function load_js() {
+        	$.material.init();
+            $("#nav_login").click(load_login);
+			$("#nav_signin").click(load_signin);
+        }
+
+		function load_login() {
+			console.debug("LOADING LOGIN");	
+			$("#body").load("index_pages/login.html", load_js);
+		}
+		
+		function load_signin() {
+			console.debug("LOADING SIGNIN");	
+			$("#body").load("index_pages/registrazione.html", load_js);
+		}
+
+		$(document).ready(function() { 	
+			load_login();
+		});
+	</script>
+
+</body>
+</html>

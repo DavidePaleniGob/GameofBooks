@@ -1,0 +1,41 @@
+<fieldset>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
+    <input type="text" id="user" class="form-control" pattern="[A-Za-z0-9]{4,20}" placeholder="Username" required> <!-- tra 4 e 20 -->
+    <input type="password" id="inputPassword" class="form-control" pattern="[A-Za-z0-9]{8,32}" placeholder="Password" required> <!-- tra 8 e 32 caratteri -->
+    <input type="password" id="confermaPassword" class="form-control" pattern="[A-Za-z0-9]{8,32}" placeholder="Conferma password" required>
+    <div class="col-md-3 col-md-offset-8">
+        <button type="button" id="signup" class="btn btn-default btn-raised btn-primary" style="background-color: #64B5F6;">Registrati</button>
+    </div>
+</fieldset>
+<script type="text/javascript">
+    $("#signup").click(function () {
+        var email = $("#inputEmail").val();
+        var user = $("#user").val();
+        var pwd = $("#inputPassword").val();
+        var pwd_conferma = $("#confermaPassword").val();
+
+        if (pwd == pwd_conferma) {
+            $.post("/controller.php",
+                    {
+                        comando: 'registrazione',
+                        parametri: {
+                            username: user,
+                            password: pwd,
+                            email: email
+                        }
+                    }).done(function (data) {
+                console.debug(data);
+                data = jQuery.parseJSON(data);
+                if (data.errore) {
+                    alert(data.risposta.testo);
+                } else {
+                    window.location.href = "/giocatore/index.html";
+                }
+            });
+        } else {
+            alert("Le password non corrispondono"); //Da cambiare in material design
+            $("#inputPassword").addClass("has-error");
+            $("#confermaPassword").addClass("has-error");
+        }
+    });
+</script>

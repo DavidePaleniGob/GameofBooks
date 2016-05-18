@@ -1,0 +1,40 @@
+<fieldset>
+  <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+  <input type="password" name="psw" class="form-control" id="password" placeholder="Password" pattern="[A-Za-z0-9]{8,32}">
+  <div class="col-md-4" style="padding-top: 5%;">
+    <a style="color: #9E9E9E;">Forgot password?</a>
+  </div>
+  <div class="col-md-3 col-md-offset-5">
+    <button class="btn btn-default btn-raised btn-primary" id="login" style="background-color: #64B5F6;">LOGIN</button>
+  </div>
+</fieldset>
+
+
+<script type="text/javascript">
+      $("#login").click(function() {
+          console.debug("LOGIN BUTTON");
+          var username = $("#username").val();
+          var password = $("#password").val();
+          $.post("/controller.php", 
+          {
+              comando: 'login',
+              parametri: {
+                  username: username,
+                  password: password
+              }
+          }, function(data) {
+          		console.debug(data);
+                        data = jQuery.parseJSON(data);
+              if(data.errore) {
+                  alert("Username o password è sbagliata");
+              }else{
+                  if(data.risposta.redirect=="creatore"){
+                      window.location.href = "/creatore/index.html";
+                  }else if(data.risposta.redirect=="giocatore"){
+                      window.location.href = "/giocatore/index.html";
+                  }
+              }
+
+          });
+      });
+</script>

@@ -1,0 +1,59 @@
+<div class="jumbotron">
+			<form>
+				<div class="container-fluid push-left">
+					<div class="form-group">
+						<label for="titolo" class="col-md-2 control-label">Titolo</label>
+						<div class="col-md-10">
+							<input type="text" class="form-control" id="titolo">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="img" class="col-md-2 control-label">File</label>
+						<div class="col-md-10">
+							<input type="text" readonly="" class="form-control" placeholder="Browse...">
+							<input type="file" id="img" multiple="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="pubblica" class="col-md-2 control-label">Pubblica</label>
+						<div class="col-md-10">
+							<div class="togglebutton">
+							<label>
+								<input type="checkbox" id="pubblica"><span class="toggle"></span>
+							</label>
+						  </div>
+						</div>
+					</div>
+					</br></br></br></br>
+					<input type="submit" class="btn btn-raised btn-default" id="carica" value="Carica"><div class="ripple-container"></div>
+				</div>
+			</form>
+		</div>
+		<div class="jumbotron" id="paragrafi">
+			Qualcosa<!--da popolare con uno script-->
+		</div>
+		
+<script type="text/javascript">
+
+	$("#carica").click(function(){
+		var titolo = $("#titolo").val();
+		var visibile = $("#visibile").val();
+		var img = $("#img").val();
+		var img_map = $("#img_map").val();
+		
+		var json = {
+				'comando': creare_lg;
+				'parametri':{
+					'nome': titolo,
+					'immagini': img,
+					'mappa': img_map,
+					'visibile': visibile
+				}
+			}
+
+		//console.log(json);
+		
+		$.post("../controller.php", json);
+	});
+</script>

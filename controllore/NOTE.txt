@@ -1,0 +1,6 @@
+Variabili di session:
+
+Id_utente:    si riferisce al tipo di utente 
+username:
+id_lg_m:  id del libro che si sta modificando
+
