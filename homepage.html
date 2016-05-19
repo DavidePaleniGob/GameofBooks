@@ -1,5 +1,5 @@
 <div div class="jumbotron">
-	<div class="panel panel-default">
+	<div class="panel panel-default" id="default_panel">
   		<div class="panel-body">
 	    	<div class="row">
 			  	<div class="col-xs-4"><img src="libro.jpg"></div>
@@ -10,5 +10,8 @@
 	</div>
 </div>	
 <script type="text/javascript">
-
+	$("#default_panel").hide();
+	$.post("/controller.php", {"comando": "lista_lg", "parametri": {"proprio": false}}, function(data) {
+		console.debug(data);
+	});
 </script>
